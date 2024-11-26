@@ -21,19 +21,19 @@ namespace API.Controllers
             service.Adicionar(ocorrencia);
         }
 
-        [HttpGet("listar-cliente")]
+        [HttpGet("listar-ocorrencia")]
         public List<Ocorrencia> Listar()
         {
             return service.Listar();
         }
 
-        [HttpPut("editar-cliente")]
+        [HttpPut("editar-ocorrencia")]
         public void Editar(Ocorrencia ocorrencia)
         {
             service.Editar(ocorrencia);
         }
 
-        [HttpDelete("remover-cliente")]
+        [HttpDelete("remover-ocorrencia")]
         public void Remover(int id)
         {
             service.Remover(id);

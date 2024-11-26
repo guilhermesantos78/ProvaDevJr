@@ -18,7 +18,6 @@
     </div>
     <div class="Right__container">
       <form @submit="CreateOcorrencia" class="form">
-
         <div class="form-group">
           <label for="DataAbertura">Data de Abertura:</label>
           <input type="date" id="DataAbertura" v-model="DataAbertura" />
@@ -35,13 +34,21 @@
         </div>
 
         <div class="form-group">
-          <label for="ClienteId1">Id do Responsável pela Abertura:</label>
-          <input type="number" id="ClienteId1" v-model="ClienteId1" />
+          <label for="propertyType1">Id do Responsável pela Abertura:</label>
+          <select id="propertyType1" v-model="ClienteId1">
+            <option v-for="Cliente in Clientes" :key="Cliente.Id" :value="Cliente.id">
+              {{ Cliente.nome }} - {{ Cliente.id }}
+            </option>
+          </select>
         </div>
 
         <div class="form-group">
-          <label for="ClienteId2">Id do Responsável pela Ocorrência:</label>
-          <input type="number" id="ClienteId2" v-model="ClienteId2" />
+          <label for="propertyType2">Id do Responsável pela Ocorrência:</label>
+          <select id="propertyType2" v-model="ClienteId2">
+            <option v-for="Cliente in Clientes" :key="Cliente.Id" :value="Cliente.id">
+              {{ Cliente.nome }} - {{ Cliente.id }}
+            </option>
+          </select>
         </div>
 
         <div class="form-group">
@@ -49,7 +56,7 @@
           <input type="text" id="Conclusao" v-model="Conclusao" />
         </div>
 
-        <button type="submit" class="submit-btn">Entrar</button>
+        <button type="submit" class="submit-btn">Enviar</button>
       </form>
     </div>
   </div>
@@ -66,7 +73,7 @@ export default {
       Descricao: '',
       ClienteId1: '',
       ClienteId2: '',
-      Conclusao: '',
+      Conclusao: ''
     };
   },
   methods: {
@@ -91,10 +98,9 @@ export default {
       });
 
       if (response1.status === 200) {
-        alert('Ocorrencia Enviada com sucesso')
-      }
-      else {
-        alert('Ocorreu um erro ao enviar a ocorrencia')
+        alert('Ocorrência enviada com sucesso');
+      } else {
+        alert('Ocorreu um erro ao enviar a ocorrência');
       }
     },
 
@@ -113,9 +119,10 @@ export default {
   },
   created() {
     this.GetClientes();
-  }
+  },
 };
 </script>
+
 
 <style>
 .container {
@@ -172,22 +179,46 @@ h3 {
   border-radius: 8px;
 }
 
-label {
-  font-weight: bold;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.form-group input {
   width: 100%;
-  max-width: 400px;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #1c92d2;
+  background-color: #fff;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(0, 43, 82);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #1A5276;
 }
 
 input[type="date"],
@@ -201,17 +232,4 @@ input[type="number"] {
   font-size: 1em;
 }
 
-button.submit-btn {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.2em;
-}
-
-button.submit-btn:hover {
-  background-color: #0056b3;
-}
 </style>
